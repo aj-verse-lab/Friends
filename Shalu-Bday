@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shalu Birthday Madness</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Comic Sans MS", "Trebuchet MS", Arial, sans-serif;
+        background: radial-gradient(circle at top, #fff1f7, #d6fff6);
+        text-align: center;
+        overflow-x: hidden;
+        color: #333;
+    }
+
+    h1 {
+        font-size: 3.2em;
+        margin-top: 30px;
+        color: #ff4081;
+        animation: popIn 1.5s;
+    }
+
+    h2 {
+        color: #444;
+        animation: popIn 2s;
+    }
+
+    @keyframes popIn {
+        from { transform: scale(0.7); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .card {
+        max-width: 850px;
+        margin: 30px auto;
+        background: white;
+        padding: 35px;
+        border-radius: 25px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        line-height: 1.9;
+        font-size: 1.15em;
+    }
+
+    .highlight {
+        color: #ff4081;
+        font-weight: bold;
+    }
+
+    button {
+        padding: 14px 30px;
+        margin: 12px;
+        border: none;
+        border-radius: 40px;
+        background: linear-gradient(135deg, #ff4081, #ff80ab);
+        color: white;
+        font-size: 1em;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+    }
+
+    .hug-btn {
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    .squeeze {
+        animation: squeeze 0.4s;
+    }
+
+    @keyframes squeeze {
+        0% { transform: scale(1); }
+        50% { transform: scale(0.9); }
+        100% { transform: scale(1); }
+    }
+
+    .shake {
+        animation: shake 0.5s;
+    }
+
+    @keyframes shake {
+        0% { transform: translate(0); }
+        20% { transform: translate(-10px, 5px); }
+        40% { transform: translate(10px, -5px); }
+        60% { transform: translate(-10px, 5px); }
+        80% { transform: translate(10px, -5px); }
+        100% { transform: translate(0); }
+    }
+
+    .balloon {
+        position: fixed;
+        bottom: -120px;
+        width: 60px;
+        height: 80px;
+        border-radius: 50%;
+        animation: floatUp linear infinite;
+        z-index: 1;
+    }
+
+    .balloon::after {
+        content: "";
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        width: 2px;
+        height: 25px;
+        background: #999;
+    }
+
+    @keyframes floatUp {
+        from { transform: translateY(0); opacity: 1; }
+        to { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    .popup {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.45);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .popup-content {
+        background: white;
+        padding: 35px;
+        border-radius: 25px;
+        max-width: 90%;
+        animation: popIn 0.6s;
+    }
+
+    .final-screen {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, #ff80ab, #80ffe8);
+        z-index: 2000;
+        color: #fff;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .final-screen h1 {
+        font-size: 4em;
+        margin-bottom: 20px;
+    }
+
+    .final-screen p {
+        font-size: 1.4em;
+        max-width: 700px;
+        line-height: 1.6;
+    }
+
+    .confetti {
+        position: fixed;
+        top: -10px;
+        width: 10px;
+        height: 10px;
+        animation: confettiFall linear infinite;
+        z-index: 3000;
+    }
+
+    @keyframes confettiFall {
+        from { transform: translateY(0); opacity: 1; }
+        to { transform: translateY(110vh); opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Happy Birthday Shalu 🎉</h1>
+<h2>Certified Crazy Friends Zone</h2>
+
+<div class="card">
+    Hey <span class="highlight">Shalu</span>,
+    <br><br>
+    This message comes from friends who laugh too loud,
+    care too much,
+    and show up no matter what.
+    <br><br>
+    You make life lighter just by being in it.
+    And when the three of us are together,
+    it feels loud, safe, silly, and real.
+    <br><br>
+    You are stuck with us.
+    And we are very happy about that.
+    <br><br>
+    Always your people,
+    <br>
+    <span class="highlight">Avi and Shivu</span>
+</div>
+
+<button onclick="openPopup('cake')">Cut the Cake 🎂</button>
+<button onclick="openPopup('candle')">Light the Candle 🕯️</button>
+<button onclick="openPopup('friends')">Crazy Friends Message 😜</button>
+<button onclick="showFinal()">Final Surprise 🎉</button>
+
+<div class="popup" id="cake">
+    <div class="popup-content">
+        <h2>Make a Wish</h2>
+        <p>More laughs, more memories, and unlimited cake.</p>
+        <button onclick="closePopup()">Done</button>
+    </div>
+</div>
+
+<div class="popup" id="candle">
+    <div class="popup-content">
+        <h2>This Light Is For You</h2>
+        <p>You light up our lives more than you know.</p>
+        <button onclick="closePopup()">Done</button>
+    </div>
+</div>
+
+<div class="popup" id="friends">
+    <div class="popup-content">
+        Official notice:
+        <br><br>
+        Shalu is our forever friend.
+        No exits.
+        No replacements.
+        <br><br>
+        Love,
+        <br>
+        Avi and Shivu 😄
+        <br><br>
+        <button onclick="closePopup()">Deal 🤝</button>
+    </div>
+</div>
+
+<div class="final-screen" id="finalScreen">
+    <h1>BEST FRIEND FOREVER 💥</h1>
+    <p>
+        Through every phase and every version of life,
+        this friendship stays.
+        <br><br>
+        Shalu 🤍
+        <br>
+        From Avi and Shivu
+    </p>
+    <button class="hug-btn" id="hugBtn" onclick="groupHug()">GROUP HUG NOW 🤗</button>
+</div>
+
+<script>
+    function randomColor() {
+        const colors = ["#ff4081", "#7c4dff", "#40c4ff", "#69f0ae", "#ffd740"];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function createBalloon() {
+        const balloon = document.createElement("div");
+        balloon.className = "balloon";
+        balloon.style.left = Math.random() * 100 + "vw";
+        balloon.style.background = randomColor();
+        balloon.style.animationDuration = (Math.random() * 4 + 6) + "s";
+        document.body.appendChild(balloon);
+        setTimeout(() => balloon.remove(), 10000);
+    }
+
+    setInterval(createBalloon, 600);
+
+    function createConfetti() {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.background = randomColor();
+        confetti.style.animationDuration = (Math.random() * 2 + 3) + "s";
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 5000);
+    }
+
+    function openPopup(id) {
+        document.getElementById(id).style.display = "flex";
+    }
+
+    function closePopup() {
+        document.querySelectorAll(".popup").forEach(p => p.style.display = "none");
+    }
+
+    function showFinal() {
+        document.getElementById("finalScreen").style.display = "flex";
+        for (let i = 0; i < 60; i++) {
+            setTimeout(createConfetti, i * 80);
+        }
+    }
+
+    function cheerSound() {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = "triangle";
+        o.frequency.setValueAtTime(440, ctx.currentTime);
+        o.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.4);
+        g.gain.setValueAtTime(0.2, ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+        o.connect(g);
+        g.connect(ctx.destination);
+        o.start();
+        o.stop(ctx.currentTime + 0.4);
+    }
+
+    function groupHug() {
+        const btn = document.getElementById("hugBtn");
+        btn.classList.add("squeeze");
+        document.body.classList.add("shake");
+        cheerSound();
+
+        for (let i = 0; i < 40; i++) {
+            setTimeout(createConfetti, i * 50);
+        }
+
+        setTimeout(() => {
+            btn.classList.remove("squeeze");
+            document.body.classList.remove("shake");
+        }, 600);
+    }
+</script>
+
+</body>
+</html>
